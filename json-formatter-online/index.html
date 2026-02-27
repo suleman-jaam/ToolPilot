@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>JSON Formatter &amp; Validator Online – Beautify and Minify JSON</title>
+    <meta
+      name="description"
+      content="Free online JSON formatter and validator. Beautify, minify, and validate JSON with error highlighting and one-click copy."
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">UtilityHub</a>
+        <nav class="main-nav">
+          <a href="/">Home</a>
+          <a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a>
+          <a href="/percentage-calculator-online/">Percentage</a>
+          <a href="/free-word-counter-tool/">Word Counter</a>
+          <a href="/json-formatter-online/" aria-current="page">JSON Formatter</a>
+          <a href="/secure-password-generator/">Password Generator</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="tool-page">
+        <div class="container tool-layout">
+          <div class="tool-box">
+            <h1>JSON Formatter Online</h1>
+            <p class="tool-description">
+              Paste your JSON to format, minify, and validate it instantly. Helpful for developers
+              working with APIs, configuration files, and logs.
+            </p>
+
+            <div class="field-group">
+              <label for="json-input">JSON input</label>
+              <textarea
+                id="json-input"
+                placeholder='Paste your JSON here, for example: {"name":"UtilityHub","tools":5}'
+              ></textarea>
+            </div>
+
+            <div class="toggle-row">
+              <button type="button" class="btn-primary" id="btn-beautify">Beautify JSON</button>
+              <button type="button" class="btn-secondary" id="btn-minify">Minify JSON</button>
+              <button type="button" class="btn-secondary" id="btn-validate">Validate</button>
+            </div>
+
+            <div class="json-output" id="json-output"></div>
+            <button type="button" class="btn-secondary copy-btn" id="btn-copy">Copy output</button>
+
+            <div class="pill-row">
+              <span class="pill">json formatter online</span>
+              <span class="pill">json beautifier</span>
+              <span class="pill">json validator</span>
+            </div>
+          </div>
+
+          <aside class="tool-sidebar">
+            <h2>Why use a JSON formatter?</h2>
+            <p>
+              JSON can be difficult to read when it is in a single line. A formatter adds
+              indentation and line breaks so you can easily see the structure and debug issues.
+            </p>
+
+            <h3>Also try</h3>
+            <ul>
+              <li><a href="/secure-password-generator/">Secure Password Generator</a></li>
+              <li><a href="/free-word-counter-tool/">Word Counter Tool</a></li>
+            </ul>
+
+            <h3>More tools</h3>
+            <ul>
+              <li><a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a></li>
+              <li><a href="/percentage-calculator-online/">Percentage Calculator</a></li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="container page-content">
+          <h2>What is JSON formatting?</h2>
+          <p>
+            JSON formatting is the process of adding consistent indentation, spacing, and line
+            breaks to raw JSON data. Properly formatted JSON is easier to read, debug, and share.
+          </p>
+
+          <h2>How to beautify JSON</h2>
+          <p>
+            Paste your JSON in the input area and click the &ldquo;Beautify JSON&rdquo; button. The
+            tool will parse the JSON and print a nicely formatted version in the output panel.
+          </p>
+
+          <h2>Why developers need a JSON validator</h2>
+          <p>
+            A JSON validator checks if your JSON is syntactically correct. Missing commas, incorrect
+            quotes, and trailing commas are common errors that can break APIs. Validation helps you
+            catch these mistakes quickly.
+          </p>
+
+          <h2>FAQs</h2>
+          <div class="faq">
+            <div class="faq-item">
+              <div class="faq-question">Is my JSON data sent anywhere?</div>
+              <p>
+                No. All JSON formatting and validation happens directly in your browser. Your data
+                never leaves your device.
+              </p>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Can I minify JSON for production?</div>
+              <p>
+                Yes. Use the &ldquo;Minify JSON&rdquo; option to remove spaces and line breaks so
+                your JSON is as compact as possible for production environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> UtilityHub. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-and-conditions.html">Terms</a>
+          <a href="/disclaimer.html">Disclaimer</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+      (function () {
+        const input = document.getElementById("json-input");
+        const output = document.getElementById("json-output");
+        const beautifyBtn = document.getElementById("btn-beautify");
+        const minifyBtn = document.getElementById("btn-minify");
+        const validateBtn = document.getElementById("btn-validate");
+        const copyBtn = document.getElementById("btn-copy");
+
+        function setOutput(text, isError) {
+          output.textContent = text;
+          output.style.borderColor = isError ? "#f97373" : "rgba(30, 64, 175, 0.9)";
+        }
+
+        function parseJSON() {
+          const value = input.value.trim();
+          if (!value) {
+            setOutput("Please paste JSON to format or validate.", true);
+            return null;
+          }
+          try {
+            return JSON.parse(value);
+          } catch (err) {
+            setOutput("Invalid JSON: " + err.message, true);
+            return null;
+          }
+        }
+
+        beautifyBtn.addEventListener("click", function () {
+          const data = parseJSON();
+          if (!data) return;
+          const pretty = JSON.stringify(data, null, 2);
+          setOutput(pretty, false);
+        });
+
+        minifyBtn.addEventListener("click", function () {
+          const data = parseJSON();
+          if (!data) return;
+          const minified = JSON.stringify(data);
+          setOutput(minified, false);
+        });
+
+        validateBtn.addEventListener("click", function () {
+          const data = parseJSON();
+          if (!data) return;
+          setOutput("JSON is valid.", false);
+        });
+
+        copyBtn.addEventListener("click", function () {
+          const text = output.textContent;
+          if (!text) return;
+          navigator.clipboard
+            .writeText(text)
+            .then(function () {
+              copyBtn.textContent = "Copied!";
+              setTimeout(function () {
+                copyBtn.textContent = "Copy output";
+              }, 1200);
+            })
+            .catch(function () {});
+        });
+      })();
+    </script>
+  </body>
+</html>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact – UtilityHub</title>
+    <meta
+      name="description"
+      content="Contact the creator of UtilityHub to report bugs, share feedback, or request new tools."
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">UtilityHub</a>
+        <nav class="main-nav">
+          <a href="/">Home</a>
+          <a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a>
+          <a href="/percentage-calculator-online/">Percentage</a>
+          <a href="/free-word-counter-tool/">Word Counter</a>
+          <a href="/json-formatter-online/">JSON Formatter</a>
+          <a href="/secure-password-generator/">Password Generator</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main legal-page">
+      <div class="container">
+        <article class="legal-card">
+          <h1>Contact</h1>
+          <div class="legal-meta">Use this form to send feedback or questions.</div>
+
+          <div class="legal-body">
+            <p>
+              Have a feature request, found a bug, or want to suggest a new tool idea? Send a
+              message using the form below.
+            </p>
+
+            <form class="tool-form" id="contact-form">
+              <div class="field-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Your name" required />
+              </div>
+              <div class="field-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" placeholder="you@example.com" required />
+              </div>
+              <div class="field-group">
+                <label for="message">Message</label>
+                <textarea id="message" placeholder="Write your message here..." required></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Send message</button>
+              <div class="tool-result" id="contact-result">
+                <div class="result-muted">
+                  This demo form does not send real emails. You can wire it to your backend or form
+                  service later.
+                </div>
+              </div>
+            </form>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> UtilityHub. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-and-conditions.html">Terms</a>
+          <a href="/disclaimer.html">Disclaimer</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+      (function () {
+        const form = document.getElementById("contact-form");
+        const result = document.getElementById("contact-result");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          result.innerHTML =
+            '<span class="text-success">Thank you! Your message is recorded locally. Connect this form to a backend or form service to receive real emails.</span>';
+        });
+      })();
+    </script>
+  </body>
+</html>
+

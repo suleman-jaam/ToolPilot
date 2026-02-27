@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Free Age Calculator Online – Calculate Exact Age by Date of Birth</title>
+    <meta
+      name="description"
+      content="Use our free online age calculator to calculate your exact age in years, months, and days from your date of birth. See your next birthday countdown instantly."
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">UtilityHub</a>
+        <nav class="main-nav">
+          <a href="/">Home</a>
+          <a href="/free-age-calculator-by-date-of-birth/" aria-current="page">Age Calculator</a>
+          <a href="/percentage-calculator-online/">Percentage</a>
+          <a href="/free-word-counter-tool/">Word Counter</a>
+          <a href="/json-formatter-online/">JSON Formatter</a>
+          <a href="/secure-password-generator/">Password Generator</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="tool-page">
+        <div class="container tool-layout">
+          <div class="tool-box">
+            <h1>Free Online Age Calculator</h1>
+            <p class="tool-description">
+              Enter your date of birth and instantly calculate your exact age in years, months, and
+              days. You will also see a live countdown to your next birthday.
+            </p>
+
+            <form class="tool-form" id="age-form">
+              <div class="field-group">
+                <label for="dob">Date of birth</label>
+                <input type="date" id="dob" required />
+              </div>
+              <button type="submit" class="btn-primary">Calculate age</button>
+            </form>
+
+            <div class="tool-result" id="age-result" aria-live="polite">
+              <div class="result-muted">Your age details will appear here.</div>
+            </div>
+
+            <div class="tool-meta-row">
+              <span class="badge">
+                <span class="badge-dot"></span>
+                Client-side only · No data stored
+              </span>
+              <span>Fast · Mobile friendly · Free forever</span>
+            </div>
+          </div>
+
+          <aside class="tool-sidebar">
+            <h2>About this age calculator</h2>
+            <p>
+              This age calculator uses your date of birth and today&rsquo;s date to calculate your
+              exact age. It works in any modern browser and does not send your data to any server.
+            </p>
+
+            <h3>Also try</h3>
+            <ul>
+              <li><a href="/percentage-calculator-online/">Percentage Calculator</a></li>
+              <li><a href="/free-word-counter-tool/">Word Counter Tool</a></li>
+            </ul>
+
+            <h3>More tools</h3>
+            <ul>
+              <li><a href="/json-formatter-online/">JSON Formatter</a></li>
+              <li><a href="/secure-password-generator/">Secure Password Generator</a></li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="container page-content">
+          <h2>What is an age calculator?</h2>
+          <p>
+            An age calculator is a simple tool that takes your date of birth and compares it with
+            today&rsquo;s date to find your exact age. Instead of counting only years, it breaks
+            your age down into years, months, and days so you can see a more precise result.
+          </p>
+
+          <h2>How to calculate age online</h2>
+          <p>Using this free online age calculator is very simple:</p>
+          <ul>
+            <li>Enter your date of birth in the date field.</li>
+            <li>Click the &ldquo;Calculate age&rdquo; button.</li>
+            <li>See your age in years, months, and days.</li>
+            <li>Check how long is left until your next birthday.</li>
+          </ul>
+
+          <h2>Formula used in age calculation</h2>
+          <p>
+            The age calculation is based on the difference between today&rsquo;s date and your date
+            of birth. The tool:
+          </p>
+          <ul>
+            <li>Finds the year difference.</li>
+            <li>Adjusts months and days when the current date is earlier in the year.</li>
+            <li>Calculates how many days remain until your next birthday.</li>
+          </ul>
+
+          <h2>Benefits of using our tool</h2>
+          <ul>
+            <li>Instant age calculation with a single click.</li>
+            <li>Works in any modern browser on mobile and desktop.</li>
+            <li>No sign-up or personal data storage.</li>
+            <li>Helpful for forms, exams, or eligibility checks.</li>
+          </ul>
+
+          <div class="faq" itemscope itemtype="https://schema.org/FAQPage">
+            <h2>Frequently asked questions</h2>
+
+            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+              <div class="faq-question" itemprop="name">How do I calculate my exact age?</div>
+              <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">
+                  Enter your date of birth in the field above and click the calculate button. The
+                  tool will instantly show your exact age in years, months, and days based on
+                  today&rsquo;s date.
+                </p>
+              </div>
+            </div>
+
+            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+              <div class="faq-question" itemprop="name">Can I calculate age in months and days?</div>
+              <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                <p itemprop="text">
+                  Yes. The result box shows a clear breakdown of your age in years, additional
+                  months, and remaining days so you can understand your age more precisely.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> UtilityHub. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-and-conditions.html">Terms</a>
+          <a href="/disclaimer.html">Disclaimer</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+      (function () {
+        const form = document.getElementById("age-form");
+        const dobInput = document.getElementById("dob");
+        const resultBox = document.getElementById("age-result");
+
+        function setMessage(html, isError) {
+          resultBox.innerHTML = html;
+          resultBox.classList.toggle("text-error", !!isError);
+        }
+
+        function calculateAge(dob) {
+          const today = new Date();
+          if (dob > today) return null;
+
+          let years = today.getFullYear() - dob.getFullYear();
+          let months = today.getMonth() - dob.getMonth();
+          let days = today.getDate() - dob.getDate();
+
+          if (days < 0) {
+            const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            days += prevMonth.getDate();
+            months -= 1;
+          }
+
+          if (months < 0) {
+            months += 12;
+            years -= 1;
+          }
+
+          return { years, months, days };
+        }
+
+        function getNextBirthdayCountdown(dob) {
+          const today = new Date();
+          let nextBirthday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+
+          if (nextBirthday < today) {
+            nextBirthday = new Date(today.getFullYear() + 1, dob.getMonth(), dob.getDate());
+          }
+
+          const diffMs = nextBirthday - today;
+          const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+          return diffDays;
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const value = dobInput.value;
+          if (!value) {
+            setMessage('<span class="text-error">Please select your date of birth.</span>', true);
+            return;
+          }
+
+          const dob = new Date(value + "T00:00:00");
+          const age = calculateAge(dob);
+          if (!age || age.years < 0) {
+            setMessage(
+              '<span class="text-error">The date of birth cannot be in the future. Please check and try again.</span>',
+              true
+            );
+            return;
+          }
+
+          const daysToBirthday = getNextBirthdayCountdown(dob);
+          const ageHtml = `
+            <div>
+              <div class="result-highlight">
+                You are <strong>${age.years}</strong> years,
+                <strong>${age.months}</strong> months, and
+                <strong>${age.days}</strong> days old.
+              </div>
+              <div class="result-muted" style="margin-top: 0.35rem;">
+                Your next birthday is in approximately <strong>${daysToBirthday}</strong> day${
+            daysToBirthday !== 1 ? "s" : ""
+          }.
+              </div>
+            </div>
+          `;
+
+          setMessage(ageHtml, false);
+        });
+      })();
+    </script>
+  </body>
+</html>
+

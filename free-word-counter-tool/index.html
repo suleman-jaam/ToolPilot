@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Free Online Word Counter Tool</title>
+    <meta
+      name="description"
+      content="Free online word counter tool to count words, characters, sentences, and estimate reading time. Perfect for students, writers, and bloggers."
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">UtilityHub</a>
+        <nav class="main-nav">
+          <a href="/">Home</a>
+          <a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a>
+          <a href="/percentage-calculator-online/">Percentage</a>
+          <a href="/free-word-counter-tool/" aria-current="page">Word Counter</a>
+          <a href="/json-formatter-online/">JSON Formatter</a>
+          <a href="/secure-password-generator/">Password Generator</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="tool-page">
+        <div class="container tool-layout">
+          <div class="tool-box">
+            <h1>Free Online Word Counter Tool</h1>
+            <p class="tool-description">
+              Paste or type your text to get instant word count, character count, sentence count,
+              and estimated reading time.
+            </p>
+
+            <div class="field-group">
+              <label for="wc-input">Your text</label>
+              <textarea
+                id="wc-input"
+                placeholder="Start typing or paste your content here..."
+              ></textarea>
+            </div>
+
+            <div class="tool-result" id="wc-stats">
+              <div class="result-muted">Start typing to see live statistics.</div>
+            </div>
+
+            <div class="chip-row">
+              <span class="chip">word count for essays</span>
+              <span class="chip">character count for tweets</span>
+              <span class="chip">reading time calculator</span>
+            </div>
+          </div>
+
+          <aside class="tool-sidebar">
+            <h2>Why use a word counter?</h2>
+            <p>
+              Many platforms and exams require content to be within a specific word or character
+              limit. A word counter helps you stay within those limits and avoid over- or
+              under-writing.
+            </p>
+
+            <h3>Also try</h3>
+            <ul>
+              <li><a href="/percentage-calculator-online/">Percentage Calculator</a></li>
+              <li><a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a></li>
+            </ul>
+
+            <h3>More tools</h3>
+            <ul>
+              <li><a href="/json-formatter-online/">JSON Formatter</a></li>
+              <li><a href="/secure-password-generator/">Secure Password Generator</a></li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="container page-content">
+          <h2>How this word counter works</h2>
+          <p>
+            The word counter updates in real time as you type. It splits text into words, sentences,
+            and characters and uses an average reading speed to estimate how long it would take to
+            read your content.
+          </p>
+
+          <h2>Word count for SEO and blogging</h2>
+          <p>
+            For blogging and SEO, word count can be an important factor. Many long-form articles
+            perform well in search when they are clear, structured, and detailed. This tool helps
+            you keep track of your length while you write.
+          </p>
+
+          <h2>Frequently asked questions</h2>
+          <div class="faq">
+            <div class="faq-item">
+              <div class="faq-question">Does this tool store my text?</div>
+              <p>
+                No. All processing happens in your browser only. Your text is not uploaded or saved
+                on any server.
+              </p>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Is the reading time accurate?</div>
+              <p>
+                Reading time is an estimate based on an average reading speed of around
+                200&ndash;250 words per minute. Actual reading time may vary between readers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> UtilityHub. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-and-conditions.html">Terms</a>
+          <a href="/disclaimer.html">Disclaimer</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+      (function () {
+        const input = document.getElementById("wc-input");
+        const statsBox = document.getElementById("wc-stats");
+
+        function countText(text) {
+          const trimmed = text.trim();
+          const words = trimmed ? trimmed.split(/\s+/).filter(Boolean).length : 0;
+          const characters = text.length;
+          const sentences = trimmed ? (trimmed.match(/[^.!?]+[.!?]+/g) || []).length : 0;
+          const readingMinutes = words / 220; // average words per minute
+          const readingTime =
+            readingMinutes < 1
+              ? "< 1 minute"
+              : readingMinutes.toFixed(1).replace(/\.0$/, "") + " minutes";
+
+          return { words, characters, sentences, readingTime };
+        }
+
+        function renderStats() {
+          const value = input.value;
+          if (!value.trim()) {
+            statsBox.innerHTML =
+              '<div class="result-muted">Start typing to see live statistics.</div>';
+            return;
+          }
+
+          const stats = countText(value);
+          statsBox.innerHTML = `
+            <div class="result-highlight">
+              Words: <strong>${stats.words}</strong> ·
+              Characters: <strong>${stats.characters}</strong> ·
+              Sentences: <strong>${stats.sentences}</strong>
+            </div>
+            <div class="result-muted" style="margin-top: 0.35rem;">
+              Estimated reading time: <strong>${stats.readingTime}</strong>
+            </div>
+          `;
+        }
+
+        input.addEventListener("input", renderStats);
+      })();
+    </script>
+  </body>
+</html>
+

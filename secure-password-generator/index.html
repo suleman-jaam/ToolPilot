@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Secure Password Generator – Create Strong Random Passwords</title>
+    <meta
+      name="description"
+      content="Free secure password generator to create strong random passwords with custom length, symbols, and numbers. Improve your online security instantly."
+    />
+    <link rel="stylesheet" href="/assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="/" class="logo">UtilityHub</a>
+        <nav class="main-nav">
+          <a href="/">Home</a>
+          <a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a>
+          <a href="/percentage-calculator-online/">Percentage</a>
+          <a href="/free-word-counter-tool/">Word Counter</a>
+          <a href="/json-formatter-online/">JSON Formatter</a>
+          <a href="/secure-password-generator/" aria-current="page">Password Generator</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <section class="tool-page">
+        <div class="container tool-layout">
+          <div class="tool-box">
+            <h1>Free Secure Password Generator</h1>
+            <p class="tool-description">
+              Generate strong, random passwords with custom length and character options. Ideal for
+              securing your online accounts.
+            </p>
+
+            <div class="field-group">
+              <label for="pw-length">Password length</label>
+              <input type="number" id="pw-length" min="6" max="64" value="16" />
+            </div>
+
+            <div class="toggle-row">
+              <label class="toggle">
+                <input type="checkbox" id="pw-uppercase" checked />
+                Uppercase letters (A&ndash;Z)
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="pw-lowercase" checked />
+                Lowercase letters (a&ndash;z)
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="pw-numbers" checked />
+                Numbers (0&ndash;9)
+              </label>
+              <label class="toggle">
+                <input type="checkbox" id="pw-symbols" checked />
+                Symbols (!@#$%)
+              </label>
+            </div>
+
+            <button type="button" class="btn-primary" id="btn-generate">Generate password</button>
+
+            <div class="tool-result" id="pw-result">
+              <div class="result-muted">Click &ldquo;Generate password&rdquo; to get started.</div>
+            </div>
+
+            <div class="strength-bar">
+              <div class="strength-fill" id="pw-strength"></div>
+            </div>
+
+            <button type="button" class="btn-secondary copy-btn" id="btn-copy-pw">
+              Copy password
+            </button>
+
+            <div class="pill-row">
+              <span class="pill">password generator</span>
+              <span class="pill">strong password generator</span>
+              <span class="pill">random password creator</span>
+            </div>
+          </div>
+
+          <aside class="tool-sidebar">
+            <h2>Why strong passwords matter</h2>
+            <p>
+              Weak passwords are easy to guess or crack. Using a random, complex password for every
+              account makes it much harder for attackers to gain access.
+            </p>
+
+            <h3>Also try</h3>
+            <ul>
+              <li><a href="/json-formatter-online/">JSON Formatter</a></li>
+              <li><a href="/free-word-counter-tool/">Word Counter Tool</a></li>
+            </ul>
+
+            <h3>More tools</h3>
+            <ul>
+              <li><a href="/free-age-calculator-by-date-of-birth/">Age Calculator</a></li>
+              <li><a href="/percentage-calculator-online/">Percentage Calculator</a></li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="container page-content">
+          <h2>How passwords are generated</h2>
+          <p>
+            The password generator randomly picks characters from the sets you select: uppercase,
+            lowercase, numbers, and symbols. It runs entirely in your browser, so no passwords are
+            sent to any server.
+          </p>
+
+          <h2>Password security tips</h2>
+          <ul>
+            <li>Use a different password for every important account.</li>
+            <li>Enable two-factor authentication whenever possible.</li>
+            <li>Avoid using personal information like names or birthdays.</li>
+          </ul>
+
+          <h2>FAQs</h2>
+          <div class="faq">
+            <div class="faq-item">
+              <div class="faq-question">Are generated passwords stored?</div>
+              <p>
+                No. Generated passwords are created in your browser only and are not stored or
+                transmitted anywhere.
+              </p>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">What password length should I use?</div>
+              <p>
+                For most accounts, a length of 12&ndash;16 characters with all character types
+                enabled is a good balance of security and usability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>&copy; <span id="year"></span> UtilityHub. All rights reserved.</p>
+        <nav class="footer-nav">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-and-conditions.html">Terms</a>
+          <a href="/disclaimer.html">Disclaimer</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+      (function () {
+        const lengthInput = document.getElementById("pw-length");
+        const upperEl = document.getElementById("pw-uppercase");
+        const lowerEl = document.getElementById("pw-lowercase");
+        const numEl = document.getElementById("pw-numbers");
+        const symEl = document.getElementById("pw-symbols");
+        const resultBox = document.getElementById("pw-result");
+        const strengthFill = document.getElementById("pw-strength");
+        const generateBtn = document.getElementById("btn-generate");
+        const copyBtn = document.getElementById("btn-copy-pw");
+
+        const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const LOWER = "abcdefghijklmnopqrstuvwxyz";
+        const NUM = "0123456789";
+        const SYM = "!@#$%^&*()-_=+[]{};:,.<>?";
+
+        function setResult(password) {
+          if (!password) {
+            resultBox.innerHTML =
+              '<span class="text-error">Unable to generate password. Please adjust options.</span>';
+            return;
+          }
+          resultBox.innerHTML = `<div class="result-highlight">Generated password:</div>
+            <div style="margin-top:0.3rem;word-break:break-all;"><strong>${password}</strong></div>`;
+        }
+
+        function updateStrength(score) {
+          const percent = Math.min(100, Math.max(0, score));
+          strengthFill.style.width = percent + "%";
+          if (percent < 40) {
+            strengthFill.style.background = "linear-gradient(90deg,#f97316,#ef4444)";
+          } else if (percent < 70) {
+            strengthFill.style.background = "linear-gradient(90deg,#eab308,#22c55e)";
+          } else {
+            strengthFill.style.background = "linear-gradient(90deg,#22c55e,#38bdf8)";
+          }
+        }
+
+        function estimateStrength(password) {
+          let score = 0;
+          if (!password) return 0;
+          const length = password.length;
+          score += Math.min(60, length * 4);
+          if (/[a-z]/.test(password)) score += 10;
+          if (/[A-Z]/.test(password)) score += 10;
+          if (/\d/.test(password)) score += 10;
+          if (/[^A-Za-z0-9]/.test(password)) score += 10;
+          return Math.min(100, score);
+        }
+
+        function generatePassword() {
+          let length = parseInt(lengthInput.value, 10);
+          if (isNaN(length) || length < 6) length = 6;
+          if (length > 64) length = 64;
+          lengthInput.value = length;
+
+          let charset = "";
+          if (upperEl.checked) charset += UPPER;
+          if (lowerEl.checked) charset += LOWER;
+          if (numEl.checked) charset += NUM;
+          if (symEl.checked) charset += SYM;
+
+          if (!charset) {
+            setResult("");
+            updateStrength(0);
+            return;
+          }
+
+          let password = "";
+          for (let i = 0; i < length; i++) {
+            const idx = Math.floor(Math.random() * charset.length);
+            password += charset[idx];
+          }
+
+          const strength = estimateStrength(password);
+          setResult(password);
+          updateStrength(strength);
+          return password;
+        }
+
+        generateBtn.addEventListener("click", generatePassword);
+
+        copyBtn.addEventListener("click", function () {
+          const textNode = resultBox.querySelector("strong");
+          if (!textNode) return;
+          const password = textNode.textContent;
+          navigator.clipboard
+            .writeText(password)
+            .then(function () {
+              copyBtn.textContent = "Copied!";
+              setTimeout(function () {
+                copyBtn.textContent = "Copy password";
+              }, 1200);
+            })
+            .catch(function () {});
+        });
+      })();
+    </script>
+  </body>
+</html>
+
